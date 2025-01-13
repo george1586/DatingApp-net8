@@ -1,4 +1,5 @@
 using System;
+using SQLitePCL;
 
 namespace API.Interfaces;
 
