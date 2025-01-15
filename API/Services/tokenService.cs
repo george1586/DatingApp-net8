@@ -13,7 +13,7 @@ public class TokenService(IConfiguration config) : Interfaces.ITokenService
         var tokenKey= config["TokenKey"] ?? throw new Exception("Cannot access token key from appsettings");
         if(tokenKey.Length<24)throw new Exception("Your token key needs to be longer");
         var key= new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(tokenKey));
-        var claims= new List<System.Security.Claims.Claim>
+        var claims= new List<Claim>
         {
             new(ClaimTypes.NameIdentifier, user.UserName)
         };  
