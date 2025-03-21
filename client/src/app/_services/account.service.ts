@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable,inject, signal  } from '@angular/core';
 import { User } from '../_models/user';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +41,9 @@ export class AccountService {
   {
     localStorage.removeItem('user');
     this.currentUser.set(null);
+  }
+  public GetSettings():Observable<any>
+  {
+    return this.http.get(this.baseUrl + 'WeatherForecast', {responseType: 'text'});
   }
 }

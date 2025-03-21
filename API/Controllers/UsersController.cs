@@ -28,4 +28,5 @@ public class UsersController(DataContext context) : BaseApiController
 
         return user;
     }
+
 }
