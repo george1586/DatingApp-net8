@@ -41,7 +41,7 @@ public class AccountController(DataContext context, ITokenService tokenService) 
     [HttpPost("login")]
     public async Task<ActionResult<UserDto>> Login(LoginDTO loginDto)
     {
-        var user=await context.Users.FirstOrDefaultAsync(x=>x.UserName==loginDto.username.ToLower());
+        var user=await context.Users.FirstOrDefaultAsync(x=>x.UserName==loginDto.username);
         if(user==null) return Unauthorized("Invalid username");
         using var hmac=new HMACSHA512(user.PasswordSalt);
         var computedHash=hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.password));
@@ -54,5 +54,14 @@ public class AccountController(DataContext context, ITokenService tokenService) 
             Username=user.UserName,
             Token=tokenService.CreateToken(user)
         };
+    }
+    [HttpDelete("delete")]
+    public async Task<ActionResult> DeleteUser(string username)
+    {
+        var user=await context.Users.FirstOrDefaultAsync(x=>x.UserName==username);
+        if(user==null) return Unauthorized("Invalid username");
+        context.Users.Remove(user);
+        await context.SaveChangesAsync();
+        return Ok("User deleted");
     }
 }
