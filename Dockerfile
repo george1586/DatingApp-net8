@@ -24,6 +24,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0
 
 WORKDIR /publish
 COPY --from=dotnet-build /publish .
+COPY --from=dotnet-build /app/API/dating.db .
 COPY --from=ng-build /app/dist/client/browser/ /publish/wwwroot
 
 EXPOSE 8080
