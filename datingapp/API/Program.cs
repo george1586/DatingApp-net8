@@ -19,6 +19,8 @@ var app = builder.Build();
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("*"));
 app.UseFileServer();
 
+app.UseFileServer();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
