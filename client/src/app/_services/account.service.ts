@@ -8,7 +8,7 @@ import { map, Observable } from 'rxjs';
 })
 export class AccountService {
   private http = inject(HttpClient);
-  baseUrl="https://localhost:5001/api/"
+  baseUrl="/api/"
   currentUser=signal<User | null>(null)
   login(model: any) { 
     return this.http.post<User>(this.baseUrl + 'account/login',model).pipe(
